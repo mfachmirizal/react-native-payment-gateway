@@ -21,6 +21,7 @@ import com.midtrans.sdk.corekit.models.UserDetail;
 import com.midtrans.sdk.corekit.models.snap.CreditCard;
 import com.midtrans.sdk.corekit.models.snap.TransactionResult;
 import com.midtrans.sdk.uikit.SdkUIFlowBuilder;
+import com.midtrans.sdk.corekit.models.snap.Authentication;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -164,7 +165,8 @@ public class MidtransModule extends ReactContextBaseJavaModule {
 
         CreditCard ccOptions = new CreditCard();
         ccOptions.setSaveCard(creditCardOptions.getBoolean("saveCard"));
-        ccOptions.setSecure(creditCardOptions.getBoolean("saveToken"));
+        // ccOptions.setSecure(creditCardOptions.getBoolean("saveToken")); //mulai versi 1.21.4 / 1.20.5 ini deprecated 
+        ccOptions.setAuthentication(Authentication.AUTH_3DS); // mulai versi 1.21.4 / 1.20.5 diganti ini
         //ccOptions.setChannel(CreditCard.MIGS);
         transactionRequest.setCreditCard(ccOptions);
         transactionRequest.setCardPaymentInfo(creditCardOptions.getString("paymentMode"), creditCardOptions.getBoolean("secure"));
